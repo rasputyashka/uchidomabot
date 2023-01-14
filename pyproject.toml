@@ -33,3 +33,6 @@ lint = ["flake8"]
 
 [project.scripts]
 tgbot = "uchidomabot.cli:cli"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
