@@ -13,6 +13,8 @@ from uchidomabot.handlers.admin import register_admin
 from uchidomabot.handlers.user import register_user
 from uchidomabot.middlewares.db import DbMiddleware
 from uchidomabot.middlewares.role import RoleMiddleware
+from uchidomabot.middlewares.http_client import ClientMiddleware
+from cheapshapi.client import CheapShark
 
 
 logger = logging.getLogger(__name__)
@@ -48,6 +50,7 @@ async def main():
     dp = Dispatcher(bot, storage=storage)
     dp.middleware.setup(DbMiddleware(pool))
     dp.middleware.setup(RoleMiddleware(config.tg_bot.admin_id))
+    dp.middleware.setup(ClientMiddleware(CheapShark()))
     dp.filters_factory.bind(RoleFilter)
     dp.filters_factory.bind(AdminFilter)
 

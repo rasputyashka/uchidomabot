@@ -4,7 +4,6 @@
 from typing import Optional
 from pydantic import BaseModel, Field
 from datetime import datetime
-from collections.abc import Sequence
 
 
 class Info(BaseModel):
@@ -36,7 +35,7 @@ class ConcreteGames(BaseModel):
     __root__: dict[str, ConcreteGame]
 
 
-class _Game(BaseModel):
+class Game(BaseModel):
     game_id: str = Field(alias="gameID")
     steam_app_id: Optional[str] = Field(alias="steamAppID")
     cheapest: str
@@ -49,7 +48,6 @@ class ListGames(BaseModel):
 
     # since pydantic does not allow using positonal arguments, i've rewritten init
     def __init__(self, games):
-        print(games)
         super().__init__(games=games)
 
-    games: list[_Game]
+    games: list[Game]

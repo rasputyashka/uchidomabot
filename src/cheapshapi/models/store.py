@@ -7,7 +7,7 @@ class _Images(BaseModel):
     icon: str
 
 
-class _Store(BaseModel):
+class Store(BaseModel):
     store_id: int = Field(alias="storeID")
     store_name: str = Field(alias="storeName")
     is_active: bool = Field(alias="isActive")
@@ -19,4 +19,4 @@ class Stores(BaseModel):
     def __init__(self, stores):
         super().__init__(stores=stores)
 
-    stores: list[_Store]
+    stores: list[Store]

@@ -8,7 +8,7 @@ from cheapshapi.models.game import ConcreteGame, ConcreteGames, ListGames
 from cheapshapi.models.store import Stores
 
 
-class CheapSharp(SharkBase):
+class CheapShark(SharkBase):
     async def list_deals(
         self,
         *,
@@ -79,7 +79,7 @@ class CheapSharp(SharkBase):
         steam_app_id: Optional[int] = None,
         limit: int = 60,
         excact: bool = False,
-    ) -> ConcreteGames:
+    ) -> ListGames:
         path = "games"
         params = {
             "title": title,
