@@ -46,8 +46,4 @@ class Game(BaseModel):
 
 class ListGames(BaseModel):
 
-    # since pydantic does not allow using positonal arguments, i've rewritten init
-    def __init__(self, games):
-        super().__init__(games=games)
-
-    games: list[Game]
+    __root__: list[Game]

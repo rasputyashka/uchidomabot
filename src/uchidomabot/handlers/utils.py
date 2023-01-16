@@ -20,7 +20,7 @@ def get_game_ids(
 
 def get_games_page(deals: Deals, game_page, decorator):
     deal_string = ""
-    for deal in deals.deals:
+    for deal in deals.__root__:
         game_link = decorator.link(deal.title.title(), redirect(deal.deal_id))
         sale_price = deal.sale_price
         old_normal_price = deal.normal_price

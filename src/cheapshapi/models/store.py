@@ -16,7 +16,5 @@ class Store(BaseModel):
 
 class Stores(BaseModel):
     # since pydantic does not allow using positonal arguments, i've rewritten init
-    def __init__(self, stores):
-        super().__init__(stores=stores)
 
-    stores: list[Store]
+    __root__: list[Store]

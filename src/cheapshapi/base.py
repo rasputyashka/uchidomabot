@@ -39,9 +39,6 @@ class SharkBase:
             ) as response:
                 if fabric != Any:
                     resp_json = await response.json()
-                    if isinstance(resp_json, list):
-                        # some api methods return arrays, not objects
-                        return fabric(resp_json)
                     # parse_obj adds __root__ support in models
                     return fabric.parse_obj(resp_json)
                 return response.status

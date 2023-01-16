@@ -38,7 +38,7 @@ async def get_store_list(
     client: CheapShark = None,
 ):
     stores = await client.get_stores()
-    working_stores = [store for store in stores.stores if store.is_active]
+    working_stores = [store for store in stores.__root__ if store.is_active]
     markup = create_stores_list_keyboard(working_stores)
     response_text = "Чтобы получить информацию о магазине, выберите его из списка"
     if isinstance(msg, CallbackQuery):
@@ -59,7 +59,7 @@ async def display_store_info(
 ):
     await call.answer()
     stores = await client.get_stores()
-    for store in stores.stores:
+    for store in stores.__root__:
         if store.store_id == int(callback_data["store_id"]):
             store_thumb = store.images.logo
             store_id = store.store_id

@@ -74,4 +74,4 @@ class Deals(BaseModel):
 
     # since pydantic does not allow using positonal arguments, i've rewritten init
 
-    deals: list[Deal]
+    __root__: list[Deal]
