@@ -34,7 +34,7 @@ def get_games_page(deals: Deals, game_page, decorator):
                 f", экономия: {float(savings):.0f}%"
             )
         else:
-            deal_string += f"\n    Цена: {normal_price}"
+            deal_string += f"\n    Цена: {normal_price}₽"
         if deal.metacritic_link:
             metacritic_link = decorator.link(
                 "Отзыв метакритики", get_metacritic(deal.metacritic_link)

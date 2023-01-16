@@ -13,7 +13,11 @@ from uchidomabot.handlers.callbacks import (
     store_callback,
     stores_list_callback,
 )
-from uchidomabot.handlers.utils import get_game_ids, get_game_pages, get_games_page
+from uchidomabot.handlers.utils import (
+    get_game_ids,
+    get_game_pages,
+    get_games_page,
+)
 from uchidomabot.keyboards.inline import (
     create_back_next_page_keyboard,
     create_settings_keyboard,
@@ -30,8 +34,8 @@ async def user_start(msg: Message, repo: Repo):
 
 
 async def get_store_list(
-    msg: Message = None,
-    client: CheapShark = None,
+    msg: Message,
+    client: CheapShark,
 ):
     stores = await client.get_stores()
     working_stores = [store for store in stores.__root__ if store.is_active]
@@ -63,10 +67,9 @@ async def display_store_info(
             markup = create_store_keyboard(store_id, page=0)
             async with state.proxy() as state_data:
                 state_data["current_store_id"] = store_id
+                sort_order = await repo.get_user_sort_order(call.from_user.id)
                 sorting_setting = (
-                    "Убывание"
-                    if await repo.get_user_sort_order(call.from_user.id) == "descending"
-                    else "Возрастание"
+                    "Убывание" if sort_order == "descending" else "Возрастание"
                 )
             await call.message.answer_photo(
                 photo=get_image(store_thumb),
@@ -113,8 +116,7 @@ async def get_games(
             sort_by=callback_data["type"],
         )
     markup = create_back_next_page_keyboard(callback_data["type"], store_id, page)
-    decorator = HtmlDecoration()
-    game_page = get_games_page(deals, page, decorator)
+    game_page = get_games_page(deals, page, HtmlDecoration())
 
     if callback_data.get("direction") is not None:
         await call.message.edit_caption(
