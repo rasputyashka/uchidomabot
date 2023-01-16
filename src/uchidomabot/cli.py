@@ -1,21 +1,20 @@
 import asyncio
 import logging
 
+import asyncpg
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
-import asyncpg
-
+from cheapshapi.client import CheapShark
 from uchidomabot.config import load_config
-from uchidomabot.filters.role import RoleFilter, AdminFilter
+from uchidomabot.filters.role import AdminFilter, RoleFilter
 from uchidomabot.handlers.admin import register_admin
 from uchidomabot.handlers.user import register_user
 from uchidomabot.middlewares.db import DbMiddleware
-from uchidomabot.middlewares.role import RoleMiddleware
 from uchidomabot.middlewares.http_client import ClientMiddleware
-from cheapshapi.client import CheapShark
-
+from uchidomabot.middlewares.role import RoleMiddleware
+from uchidomabot.set_commands import set_commands
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +53,9 @@ async def main():
     dp.filters_factory.bind(RoleFilter)
     dp.filters_factory.bind(AdminFilter)
 
-    register_admin(dp)
+    await set_commands(dp)
+
+    # register_admin(dp)
     register_user(dp)
 
     # start

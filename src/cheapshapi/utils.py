@@ -8,3 +8,7 @@ def redirect(path) -> str:
 
 def get_metacritic(path) -> str:
     return f"https://www.metacritic.com{path}"
+
+
+def get_steam_page(game_id) -> str:
+    return f"https://store.steampowered.com/app/{game_id}"

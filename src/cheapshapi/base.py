@@ -7,6 +7,8 @@ from cheapshapi.exceptions import SharkException
 
 BASE_URL = "https://www.cheapshark.com/api/1.0/"
 
+from pprint import pprint
+
 
 class SharkBase:
     def __init__(self, session: Optional[ClientSession] = None):

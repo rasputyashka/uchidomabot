@@ -2,8 +2,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from cheapshapi.models.store import Store
 from uchidomabot.handlers.callbacks import (
-    concrete_game_criteria_callback,
-    sorting_games_callback,
+    game_criteria_callback,
     store_callback,
     stores_list_callback,
     back_next_game_page_callback,
@@ -17,25 +16,18 @@ def create_stores_list_keyboard(stores: list[Store]):
         store_id = store.store_id
         button = InlineKeyboardButton(
             text=store_name,
-            callback_data=store_callback.new(store_id=store_id),
+            callback_data=store_callback.new(store_id),
         )
         markup.insert(button)
     return markup
 
 
-def create_store_keyboard():
+def create_store_keyboard(store_id, page):
     markup = InlineKeyboardMarkup(row_width=2)
 
-    concrete_criterias = (("AAA игры: ", "AAA"), ("Скидки: ", "onSale"))
-
-    for criteria in concrete_criterias:
-        concrete_button = InlineKeyboardButton(
-            text=criteria[0],
-            callback_data=concrete_game_criteria_callback.new(criteria[1]),
-        )
-        markup.insert(concrete_button)
-
-    sort_criteria = (
+    concrete_criterias = (
+        ("AAA игры: ", "AAA"),
+        ("Скидки: ", "onSale"),
         ("Сортировать по выгоде", "Savings"),
         ("Сортировать по цене", "Price"),
         ("Сортировать по оценке metacritic", "Metacritic"),
@@ -43,35 +35,42 @@ def create_store_keyboard():
         ("Сортировать по отзывам", "Reviews"),
     )
 
-    for sort_info in sort_criteria:
-        sort_button = InlineKeyboardButton(
-            text=sort_info[0],
-            callback_data=sorting_games_callback.new(*sort_info[1:]),
+    for criteria in concrete_criterias:
+        concrete_button = InlineKeyboardButton(
+            text=criteria[0],
+            callback_data=game_criteria_callback.new(
+                criteria[1], store_id, page
+            ),
         )
-        markup.insert(sort_button)
+        markup.insert(concrete_button)
 
     exit_button = InlineKeyboardButton(
-        "назад", callback_data=stores_list_callback.new()
+        "вернуться", callback_data=stores_list_callback.new()
     )
     markup.add(exit_button)
     return markup
 
 
-def create_back_next_page_keyboard(game_type: str = None, sort_by: str = None):
+def create_back_next_page_keyboard(sort_type: str, store_id, page):
     markup = InlineKeyboardMarkup(2)
-    if sort_by is None:
-        param = game_type
-    else:
-        param = sort_by
     next_button = InlineKeyboardButton(
         text="Дальше",
-        callback_data=back_next_game_page_callback.new(param, "next"),
+        callback_data=back_next_game_page_callback.new(
+            sort_type, "next", store_id, page + 1
+        ),
     )
     prev_button = InlineKeyboardButton(
         text="Назад",
-        callback_data=back_next_game_page_callback.new(param, "back"),
+        callback_data=back_next_game_page_callback.new(
+            sort_type, "back", store_id, page - 1
+        ),
     )
     markup.row(prev_button, next_button)
+
+    exit_button = InlineKeyboardButton(
+        "Вернуться", callback_data=store_callback.new(store_id)
+    )
+    markup.add(exit_button)
     return markup
 
 
@@ -83,3 +82,9 @@ def create_settings_keyboard():
     )
     markup.insert(change_button)
     return markup
+
+
+def create_store_link_keyboard(url):
+    markup = InlineKeyboardMarkup()
+    button = InlineKeyboardButton(text="Перейти", url=url)
+    return markup.insert(button)
