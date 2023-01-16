@@ -24,3 +24,5 @@ ignore=
     D107,
     # W504 line break after binary operator
     W504,
+    # WPS306 founc class without base class - requires deriving from object
+    WPSS306,

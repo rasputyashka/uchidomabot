@@ -30,6 +30,8 @@ class CheapShark(SharkBase):
         on_sale: bool = False,
         output: Optional[str] = None,
     ) -> Deals:
+        """Implement `List of Deal` section."""
+        path = "deals"
         params = {
             "pageNumber": page_number,
             "pageSize": page_size,
@@ -56,7 +58,6 @@ class CheapShark(SharkBase):
         if output is not None:
             params["output"] = output
 
-        path = "deals"
         headers = {"x_rapidapi_user": "rasputyashka@gmail.com"}
         return await self._request(
             path,
@@ -67,6 +68,10 @@ class CheapShark(SharkBase):
         )
 
     async def get_deal(self, deal_id: str) -> ConcreteDeal:
+        """Implement of `Deal Loopup` section.
+
+        aiohttp does not support encoded params, so url is created manually.
+        """
         path = "deals"
         return await self._request(
             f"{path}?id={deal_id}", fabric=ConcreteDeal, method="GET"
@@ -80,6 +85,7 @@ class CheapShark(SharkBase):
         limit: int = 60,
         excact: bool = False,
     ) -> ListGames:
+        """Implment `List of Games` section."""
         path = "games"
         params = {
             "title": title,
@@ -92,28 +98,35 @@ class CheapShark(SharkBase):
         return await self._request(path, fabric=ListGames, method="GET", params=params)
 
     async def get_game(self, game_id: int) -> ConcreteGame:
+        """Implement `Game Lookup` section.
+
+        aiohttp does not support encoded params, so url is created manually.
+        """
         path = "games"
         return await self._request(
             f"{path}?id={game_id}", fabric=ConcreteGame, method="GET"
         )
 
     async def get_games(self, *game_ids: Sequence[int]) -> ConcreteGames:
+        """Implement `Multiple Game Lookup` section.
+
+        aiohttp does not support encoded params, so url is created manually.
+        """
         path = "games"
         # conversion to str allows user to pass id in more convinient way
         game_ids = ",".join([str(game_id) for game_id in game_ids])
         if not game_ids:
             raise SharkException("Not enough game ids")
-        res = await self._request(
+        return await self._request(
             f"{path}?ids={game_ids}",
             fabric=ConcreteGames,
             method="GET",
         )
-        return res
 
     async def get_stores(self) -> Stores:
+        """Implement `Stores Info` section."""
         path = "stores"
-        response = await self._request(path, fabric=Stores, method="GET")
-        return response
+        return await self._request(path, fabric=Stores, method="GET")
 
     async def edit_alert(
         self,
@@ -123,6 +136,10 @@ class CheapShark(SharkBase):
         game_id: int,
         price: Optional[float] = None,
     ) -> bool:
+        """Implement `Edit Alert` section.
+
+        Since the api does not give correct prices, I don't use this method.
+        """
         path = "alerts"
         if action == "set" and price is None:
             msg = "Price is required if action parameter is 'set'"
@@ -136,6 +153,10 @@ class CheapShark(SharkBase):
         return await self._request(path, method="GET", params=params)
 
     async def manage_alert(self, action: Literal["set", "delete"], email: str) -> bool:
+        """Implement `Edit Alert` section.
+
+        Since the api does not give correct prices, I don't use this method.
+        """
         path = "alerts"
         params = {"action": action, "email": email}
         return await self._request(path, method="GET", parms=params)

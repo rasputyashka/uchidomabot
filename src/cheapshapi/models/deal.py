@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -73,7 +73,5 @@ class Deal(BaseModel):
 class Deals(BaseModel):
 
     # since pydantic does not allow using positonal arguments, i've rewritten init
-    def __init__(self, deals):
-        super().__init__(deals=deals)
 
     deals: list[Deal]
