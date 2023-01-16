@@ -1,6 +1,5 @@
 from aiogram import Dispatcher
 from aiogram.types import Message
-
 from uchidomabot.models.role import UserRole
 
 

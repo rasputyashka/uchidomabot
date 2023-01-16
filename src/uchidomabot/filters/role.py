@@ -3,7 +3,6 @@ import typing
 from aiogram.dispatcher.filters import BoundFilter
 from aiogram.dispatcher.handler import ctx_data
 from aiogram.types.base import TelegramObject
-
 from uchidomabot.models.role import UserRole
 
 

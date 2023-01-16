@@ -1,9 +1,10 @@
 # It is possible to make some base classes with common fields
 # but i've noticed it too late, so I won't do anythting about it so far
-
-from typing import Optional
-from pydantic import BaseModel, Field
 from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel
+from pydantic import Field
 
 
 class Info(BaseModel):

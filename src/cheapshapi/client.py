@@ -1,10 +1,14 @@
 from collections.abc import Sequence
-from typing import Literal, Optional
+from typing import Literal
+from typing import Optional
 
 from cheapshapi.base import SharkBase
 from cheapshapi.exceptions import SharkException
-from cheapshapi.models.deal import ConcreteDeal, Deals
-from cheapshapi.models.game import ConcreteGame, ConcreteGames, ListGames
+from cheapshapi.models.deal import ConcreteDeal
+from cheapshapi.models.deal import Deals
+from cheapshapi.models.game import ConcreteGame
+from cheapshapi.models.game import ConcreteGames
+from cheapshapi.models.game import ListGames
 from cheapshapi.models.store import Stores
 
 

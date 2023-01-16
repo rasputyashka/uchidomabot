@@ -1,5 +1,4 @@
 from aiogram.dispatcher.middlewares import LifetimeControllerMiddleware
-
 from uchidomabot.services.repository import Repo
 
 

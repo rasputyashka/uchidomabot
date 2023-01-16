@@ -1,8 +1,11 @@
 from aiohttp import ClientSession
-from cheapshapi.models.deal import ConcreteDeal, Deals
-from cheapshapi.models.store import Stores
-from cheapshapi.models.game import ConcreteGame, ConcreteGames, ListGames
 from cheapshapi.client import CheapShark
+from cheapshapi.models.deal import ConcreteDeal
+from cheapshapi.models.deal import Deals
+from cheapshapi.models.game import ConcreteGame
+from cheapshapi.models.game import ConcreteGames
+from cheapshapi.models.game import ListGames
+from cheapshapi.models.store import Stores
 
 
 async def test_solo_deal():

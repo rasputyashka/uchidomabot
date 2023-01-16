@@ -1,5 +1,4 @@
 from aiogram.dispatcher.middlewares import LifetimeControllerMiddleware
-
 from uchidomabot.models.role import UserRole
 
 
