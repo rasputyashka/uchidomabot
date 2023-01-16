@@ -3,13 +3,9 @@ from collections import namedtuple
 from operator import attrgetter
 
 from cheapshapi.models.deal import Deals
-from cheapshapi.models.game import ConcreteGame
-from cheapshapi.models.game import ConcreteGames
-from cheapshapi.utils import get_metacritic
-from cheapshapi.utils import get_steam_page
-from cheapshapi.utils import redirect
+from cheapshapi.models.game import ConcreteGame, ConcreteGames
+from cheapshapi.utils import get_metacritic, get_steam_page, redirect
 from uchidomabot.keyboards.inline import create_store_link_keyboard
-
 
 NUMBER_PATTERN = re.compile("\d+")
 PageInfo = namedtuple("PageInfo", "text thumb markup")

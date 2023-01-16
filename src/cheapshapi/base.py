@@ -1,10 +1,9 @@
-from typing import Any
-from typing import Optional
+from typing import Any, Optional
 
-from aiohttp import ClientError
-from aiohttp import ClientSession
-from cheapshapi.exceptions import SharkException
+from aiohttp import ClientError, ClientSession
 from yarl import URL
+
+from cheapshapi.exceptions import SharkException
 
 BASE_URL = "https://www.cheapshark.com/api/1.0/"
 

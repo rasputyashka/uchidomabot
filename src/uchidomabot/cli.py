@@ -2,14 +2,13 @@ import asyncio
 import logging
 
 import asyncpg
-from aiogram import Bot
-from aiogram import Dispatcher
+from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
+
 from cheapshapi.client import CheapShark
 from uchidomabot.config import load_config
-from uchidomabot.filters.role import AdminFilter
-from uchidomabot.filters.role import RoleFilter
+from uchidomabot.filters.role import AdminFilter, RoleFilter
 from uchidomabot.handlers.admin import register_admin
 from uchidomabot.handlers.user import register_user
 from uchidomabot.middlewares.db import DbMiddleware

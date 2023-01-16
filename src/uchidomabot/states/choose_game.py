@@ -1,5 +1,4 @@
-from aiogram.dispatcher.filters.state import State
-from aiogram.dispatcher.filters.state import StatesGroup
+from aiogram.dispatcher.filters.state import State, StatesGroup
 
 
 class ChooseGame(StatesGroup):

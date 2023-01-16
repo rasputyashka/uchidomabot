@@ -2,22 +2,24 @@ from functools import partial
 
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
-from aiogram.types import CallbackQuery
-from aiogram.types import Message
+from aiogram.types import CallbackQuery, Message
 from aiogram.utils.text_decorations import HtmlDecoration
+
 from cheapshapi.client import CheapShark
 from cheapshapi.utils import get_image
-from uchidomabot.handlers.callbacks import back_next_game_page_callback
-from uchidomabot.handlers.callbacks import game_criteria_callback
-from uchidomabot.handlers.callbacks import store_callback
-from uchidomabot.handlers.callbacks import stores_list_callback
-from uchidomabot.handlers.utils import get_game_ids
-from uchidomabot.handlers.utils import get_game_pages
-from uchidomabot.handlers.utils import get_games_page
-from uchidomabot.keyboards.inline import create_back_next_page_keyboard
-from uchidomabot.keyboards.inline import create_settings_keyboard
-from uchidomabot.keyboards.inline import create_store_keyboard
-from uchidomabot.keyboards.inline import create_stores_list_keyboard
+from uchidomabot.handlers.callbacks import (
+    back_next_game_page_callback,
+    game_criteria_callback,
+    store_callback,
+    stores_list_callback,
+)
+from uchidomabot.handlers.utils import get_game_ids, get_game_pages, get_games_page
+from uchidomabot.keyboards.inline import (
+    create_back_next_page_keyboard,
+    create_settings_keyboard,
+    create_store_keyboard,
+    create_stores_list_keyboard,
+)
 from uchidomabot.services.repository import Repo
 from uchidomabot.states.choose_game import ChooseGame
 

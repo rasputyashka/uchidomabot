@@ -1,10 +1,12 @@
-from aiogram.types import InlineKeyboardButton
-from aiogram.types import InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 from cheapshapi.models.store import Store
-from uchidomabot.handlers.callbacks import back_next_game_page_callback
-from uchidomabot.handlers.callbacks import game_criteria_callback
-from uchidomabot.handlers.callbacks import store_callback
-from uchidomabot.handlers.callbacks import stores_list_callback
+from uchidomabot.handlers.callbacks import (
+    back_next_game_page_callback,
+    game_criteria_callback,
+    store_callback,
+    stores_list_callback,
+)
 
 
 def create_stores_list_keyboard(stores: list[Store]):
