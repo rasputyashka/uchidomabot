@@ -40,9 +40,7 @@ async def get_store_list(
     stores = await client.get_stores()
     working_stores = [store for store in stores.stores if store.is_active]
     markup = create_stores_list_keyboard(working_stores)
-    response_text = (
-        "Чтобы получить информацию о магазине, выберите его из списка"
-    )
+    response_text = "Чтобы получить информацию о магазине, выберите его из списка"
     if isinstance(msg, CallbackQuery):
         msg = msg.message
         await msg.delete()
@@ -71,8 +69,7 @@ async def display_store_info(
                 state_data["current_store_id"] = store_id
                 sorting_setting = (
                     "Убывание"
-                    if await repo.get_user_sort_order(call.from_user.id)
-                    == "descending"
+                    if await repo.get_user_sort_order(call.from_user.id) == "descending"
                     else "Возрастание"
                 )
             await call.message.answer_photo(
@@ -119,9 +116,7 @@ async def get_games(
         deals = await base_func(
             sort_by=callback_data["type"],
         )
-    markup = create_back_next_page_keyboard(
-        callback_data["type"], store_id, page
-    )
+    markup = create_back_next_page_keyboard(callback_data["type"], store_id, page)
     decorator = HtmlDecoration()
     game_page = get_games_page(deals, page, decorator)
 
@@ -143,9 +138,7 @@ async def get_settings(msg: Message, repo: Repo):
     user_sort_order = await repo.get_user_sort_order(msg.from_id)
 
     # user friendly representation
-    user_order = (
-        "Убывание" if user_sort_order == "descending" else "Возрастание"
-    )
+    user_order = "Убывание" if user_sort_order == "descending" else "Возрастание"
 
     info_string = (
         "Порядок сортировки*: {0}\n\n*Порядок сортировки используется"
@@ -205,9 +198,7 @@ async def get_game(msg: Message, client: CheapShark, state: FSMContext):
             )
 
 
-async def get_game_with_state(
-    msg: Message, state: FSMContext, client: CheapShark
-):
+async def get_game_with_state(msg: Message, state: FSMContext, client: CheapShark):
     user_data = msg.text
     decorator = HtmlDecoration()
     game_ids = get_game_ids(user_data)
@@ -250,19 +241,11 @@ def register_user(dp: Dispatcher):
     dp.register_message_handler(help_message, commands=["help", "помощь"])
     dp.register_message_handler(get_game, commands=["get_game"])
 
-    dp.register_callback_query_handler(
-        display_store_info, store_callback.filter()
-    )
-    dp.register_callback_query_handler(
-        get_store_list, stores_list_callback.filter()
-    )
+    dp.register_callback_query_handler(display_store_info, store_callback.filter())
+    dp.register_callback_query_handler(get_store_list, stores_list_callback.filter())
 
-    dp.register_callback_query_handler(
-        get_games, game_criteria_callback.filter()
-    )
-    dp.register_callback_query_handler(
-        get_games, back_next_game_page_callback.filter()
-    )
+    dp.register_callback_query_handler(get_games, game_criteria_callback.filter())
+    dp.register_callback_query_handler(get_games, back_next_game_page_callback.filter())
     dp.register_callback_query_handler(
         invert_user_sorting_order, text_contains="invert_sort_order"
     )

@@ -38,9 +38,7 @@ def create_store_keyboard(store_id, page):
     for criteria in concrete_criterias:
         concrete_button = InlineKeyboardButton(
             text=criteria[0],
-            callback_data=game_criteria_callback.new(
-                criteria[1], store_id, page
-            ),
+            callback_data=game_criteria_callback.new(criteria[1], store_id, page),
         )
         markup.insert(concrete_button)
 

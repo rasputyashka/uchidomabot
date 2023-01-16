@@ -89,9 +89,7 @@ class CheapShark(SharkBase):
         if steam_app_id is not None:
             params["steamAppID"] = steam_app_id
 
-        return await self._request(
-            path, fabric=ListGames, method="GET", params=params
-        )
+        return await self._request(path, fabric=ListGames, method="GET", params=params)
 
     async def get_game(self, game_id: int) -> ConcreteGame:
         path = "games"
@@ -137,9 +135,7 @@ class CheapShark(SharkBase):
         }
         return await self._request(path, method="GET", params=params)
 
-    async def manage_alert(
-        self, action: Literal["set", "delete"], email: str
-    ) -> bool:
+    async def manage_alert(self, action: Literal["set", "delete"], email: str) -> bool:
         path = "alerts"
         params = {"action": action, "email": email}
         return await self._request(path, method="GET", parms=params)

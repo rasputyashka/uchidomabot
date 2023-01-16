@@ -48,9 +48,7 @@ def get_games_page(deals: Deals, game_page, decorator):
     return deal_string
 
 
-def get_game_pages(
-    games: ConcreteGames | ConcreteGame, decorator
-) -> list[PageInfo]:
+def get_game_pages(games: ConcreteGames | ConcreteGame, decorator) -> list[PageInfo]:
     pages = []
     if isinstance(games, ConcreteGame):
         games = [games]
@@ -63,9 +61,7 @@ def get_game_pages(
         thumb = game_info.thumb
         cheapest_price_info = game.cheapest_price_ever
         cheapest_price = int(float(cheapest_price_info.price) * 67)
-        cheapest_price = (
-            f"{cheapest_price}₽ at {cheapest_price_info.date: %Y-%m-%d}"
-        )
+        cheapest_price = f"{cheapest_price}₽ at {cheapest_price_info.date: %Y-%m-%d}"
         min_deal = min(game.deals, key=attrgetter("price"))
         min_deal_price = int(float(min_deal.price * 67))
         deal_link = redirect(min_deal.deal_id)

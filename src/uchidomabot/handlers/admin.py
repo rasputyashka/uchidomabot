@@ -10,7 +10,10 @@ async def admin_start(m: Message):
 
 def register_admin(dp: Dispatcher):
     dp.register_message_handler(
-        admin_start, commands=["start"], state="*", role=UserRole.ADMIN,
+        admin_start,
+        commands=["start"],
+        state="*",
+        role=UserRole.ADMIN,
     )
     # Either you can pass multiple roles:
     # dp.register_message_handler(
