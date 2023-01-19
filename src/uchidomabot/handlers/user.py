@@ -201,8 +201,11 @@ async def get_game_with_state(msg: Message, state: FSMContext, client: CheapShar
     decorator = HtmlDecoration()
     game_ids = get_game_ids(user_data)
     if not game_ids:
-        await msg.answer("Ни одного id не найдено")
-    if len(game_ids) == 1:
+        await msg.answer("Ни одного id не найдено, попробуйте ещё раз: /get_games")
+        await state.finish()
+        # we do not need to send anything else
+        return
+    elif len(game_ids) == 1:
         game = await client.get_game(game_ids[0])
         game_pages = get_game_pages(game, decorator)
     else:
